@@ -1,7 +1,25 @@
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 </head>
+
 <body>
   <div id="root" />
+
+  <script>
+    function animateCSS(element, animationName, callback) {
+      const node = document.querySelector(element)
+      node.classList.add('animated', animationName)
+
+      function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+      }
+
+      node.addEventListener('animationend', handleAnimationEnd)
+    }
+  </script>
 </body>

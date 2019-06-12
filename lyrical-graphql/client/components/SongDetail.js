@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { Link } from 'react-router';
 import fetchSong from '../queries/fetchSong';
+import { Link } from 'react-router';
+
 import LyricCreate from './LyricCreate';
 import LyricList from './LyricList';
 
@@ -9,14 +10,19 @@ class SongDetail extends Component {
   render() {
     const { song } = this.props.data;
 
-    if (!song) { return <div>Loading...</div>; }
+    if (!song) { return <div>loading...</div> }
 
     return (
       <div>
-        <Link to="/">Back</Link>
-        <h3>{song.title}</h3>
+        <h4>{song.title}</h4>
         <LyricList lyrics={song.lyrics} />
-        <LyricCreate songId={this.props.params.id} />
+        <LyricCreate songId={song.id} />
+        <Link
+          to="/"
+          className="btn blue left"
+        >
+          <i className="material-icons">keyboard_arrow_left</i>
+        </Link>
       </div>
     );
   }
